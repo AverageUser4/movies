@@ -1,0 +1,27 @@
+
+relevant params:
+  - i=x - search for movie with given id
+  - returns object with more data about movie than bulk search
+
+  - s=x - search for given string
+  - page=x - by default api returns page 1, if given page does not exist 
+    (or there was different error, eg. movie not found)
+    it returns { Response: "False", Error: "<error data>"
+  - it may return error when there is too many results, eg. single letter in search string
+
+  - on success it returns: 
+  {
+    Search: [
+      {
+        Title: "...",
+        Year: "...",
+        imdbID: "...",
+        Type: "...",
+        Poster: "link to image or N/A"
+      },
+      ...
+    ],
+    totalResults: "number",
+    Response: "true"
+  }
+  - 'Search' array has 10 elements, unless it's last page, then it may be less
