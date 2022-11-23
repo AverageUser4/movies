@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Movie({ movie }) {
+  const currentPath = useLocation().pathname;
+
   return (
     <Link 
-      to={`/movies/${movie.imdbID}`}
+      to={{ pathname: `/movies/${movie.imdbID}`, state: currentPath }}
       className="movie"
     >
 

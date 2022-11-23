@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useLocation, Link } from 'react-router-dom'
 import useMovieFetch from '../hooks/useMovieFetch'
 
 const noImagePlaceholder = 'https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png';
@@ -7,7 +7,9 @@ const noImagePlaceholder = 'https://upload.wikimedia.org/wikipedia/commons/f/fc/
 const MoviePage = () => {
   const { id } = useParams();
   const { movies, loading, error } = useMovieFetch({ id });
-  const history = useHistory();
+  const { state } = useLocation();
+
+  const goBackButton = <Link className="btn" to={state ?? '/'}>back to movies</Link>;
 
   if(loading)
     return <h1>Loading...</h1>
@@ -18,12 +20,7 @@ const MoviePage = () => {
 
         <h1>Movie not found!</h1>
 
-        <button 
-          className="btn"
-          onClick={() => history.go(-1)}
-        >
-          back to movies
-        </button>
+        {goBackButton}
 
       </div>
     );
@@ -44,12 +41,7 @@ const MoviePage = () => {
 
         <h4>{movies.Year}</h4>
 
-        <button 
-          className="btn"
-          onClick={() => history.go(-1)}
-        >
-          back to movies
-        </button>
+        {goBackButton}
 
       </div>
 
