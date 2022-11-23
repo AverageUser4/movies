@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { noImagePlaceholder } from '../utils';
-
 export default function Movie({ movie }) {
   return (
     <Link 
@@ -14,7 +12,7 @@ export default function Movie({ movie }) {
 
         <img
           alt={movie.Title} 
-          src={movie.Poster !== 'N/A' ? movie.Poster : noImagePlaceholder}
+          src={movie.Poster !== 'N/A' ? movie.Poster : null}
         />
 
         <div className="movie-info">

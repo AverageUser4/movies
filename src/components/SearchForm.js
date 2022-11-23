@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 
-const SearchForm = ({ query }) => {
+const SearchForm = ({ query, error, loading }) => {
   const [textInput, setTextInput] = useState(query);
   const [redirect, setRedirect] = useState(false);
+
+  useEffect(() => {
+    setRedirect(false);
+  }, [redirect])
+
 
   function handleSubmit(event) {
     event.preventDefault();
     setRedirect(true);
   }
 
-  useEffect(() => {
-    setRedirect(false);
-  }, [redirect])
+  if(redirect)
+    return <Redirect to={textInput ? `/${textInput}/1` : '/'}/>;
 
   return (
     <form 
@@ -28,7 +32,11 @@ const SearchForm = ({ query }) => {
         value={textInput}
       />
 
-      {redirect && <Redirect to={`/${textInput}/1`}/>}
+      {error && <div className="error">{error}</div>}
+
+      {!query && <h3 className="search-prompt">Search for your favorite movies!</h3>}
+
+      {loading && <h3 className="search-prompt">Loading...</h3>}
 
     </form>
   );

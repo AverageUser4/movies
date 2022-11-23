@@ -163,6 +163,10 @@ Search
   padding-top: 0.5rem;
   letter-spacing: var(--spacing);
 }
+.search-prompt {
+  margin-top: 32px;
+  color: var(--clr-primary-1);
+}
 /*
 =============== 
 Loading
@@ -203,6 +207,10 @@ Movies
 .movie {
   position: relative;
   overflow: hidden;
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .movie img {
   width: 100%;
@@ -274,6 +282,12 @@ Single Movie
 .btn:hover {
   cursor: pointer;
 }
+.btn--active {
+  background-color: var(--clr-primary-3);
+}
+.btn--active:hover {
+  cursor: default;
+}
 @media screen and (min-width: 992px) {
   .single-movie {
     grid-template-columns: 1fr 2fr;
@@ -284,6 +298,8 @@ Single Movie
   padding: 2rem;
 }
 
+
+
 /*
 =============== 
 Pagination
@@ -291,6 +307,14 @@ Pagination
 */
 .pagination {
   display: flex;
-  gap: 12px;
   flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+
+  margin: 0 auto 80px;
+  width: 90vw;
+  max-width: var(--max-width);
+}
+.pagination .btn {
+  margin: 0;
 }
