@@ -1,39 +1,48 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useParams, useHistory } from 'react-router-dom'
-import { API_ENDPOINT, noImagePlaceholder } from '../utils'
+import useMovieFetch from '../hooks/useMovieFetch'
+
+const noImagePlaceholder = 'https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png';
 
 const MoviePage = () => {
-  const [data, setData] = useState(null);
   const { id } = useParams();
+  const { movies, loading, error } = useMovieFetch({ id });
   const history = useHistory();
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch(API_ENDPOINT + `&i=${id}`);
-      const json = await response.json();
-      setData(json);
-    }
-    fetchData();
-  }, []);
-
-  if(!data)
+  if(loading)
     return <h1>Loading...</h1>
+
+  if(error)
+    return (
+      <div>
+
+        <h1>Movie not found!</h1>
+
+        <button 
+          className="btn"
+          onClick={() => history.go(-1)}
+        >
+          back to movies
+        </button>
+
+      </div>
+    );
 
   return (
     <section className="single-movie">
 
       <img 
-        src={data.Poster !== 'N/A' ? data.Poster : noImagePlaceholder}
-        alt={data.Title}
+        src={movies.Poster !== 'N/A' ? movies.Poster : noImagePlaceholder}
+        alt={movies.Title}
       />
 
       <div className="single-movie-info">
 
-        <h2>{data.Title}</h2>
+        <h2>{movies.Title}</h2>
 
-        <p>{data.Plot !== 'N/A' ? data.Plot : 'Plot unavailable.'}</p>
+        <p>{movies.Plot !== 'N/A' ? movies.Plot : 'Plot unavailable.'}</p>
 
-        <h4>{data.Year}</h4>
+        <h4>{movies.Year}</h4>
 
         <button 
           className="btn"

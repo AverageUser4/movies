@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Pagination({ query, currentPage, pages }) {
+export default function Pagination({ query, currentPage, pagesCount }) {
   const paginationElements = [];
-  for(let i = 1; i <= pages; i++) {
+  for(let i = 1; i <= pagesCount; i++) {
     if(Math.abs(i - currentPage) <= 3)
       paginationElements.push(
         <li key={i}>
@@ -19,7 +19,7 @@ export default function Pagination({ query, currentPage, pages }) {
     );
   }
 
-  if(pages <= 1)
+  if(pagesCount <= 1)
     return null;
 
   return (
@@ -37,8 +37,8 @@ export default function Pagination({ query, currentPage, pages }) {
 
       <Link 
         className="btn"
-        to={`/${query}/${pages}`}
-        title={pages}
+        to={`/${query}/${pagesCount}`}
+        title={pagesCount}
       >
         &gt;&gt;
       </Link>
