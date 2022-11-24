@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom'
 
 const SearchForm = ({ query, error, loading }) => {
   const [textInput, setTextInput] = useState(query);
+  const [select, setSelect] = useState('any');
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
@@ -16,7 +17,7 @@ const SearchForm = ({ query, error, loading }) => {
   }
 
   if(redirect)
-    return <Redirect to={textInput ? `/${textInput}/1` : '/'}/>;
+    return <Redirect to={textInput ? `/search?query=${textInput}&page=1` : '/search'}/>;
 
   return (
     <form 
@@ -24,7 +25,7 @@ const SearchForm = ({ query, error, loading }) => {
       onSubmit={handleSubmit}
     >
 
-      <h2>search movies</h2>
+      <h3 className="search-prompt">Search for your favorite movies!</h3>
 
       <input 
         className="form-input"
@@ -32,11 +33,24 @@ const SearchForm = ({ query, error, loading }) => {
         value={textInput}
       />
 
+      <select 
+        className="form-input"
+        value={select}
+        onChange={(e) => setSelect(e.target.value)}
+      >
+
+        <option value="any">Any</option>
+        <option value="movie">Movie</option>
+        <option value="series">Series</option>
+        <option value="episode">Episode</option>
+
+        <option value="note">this select does not do anything yet</option>
+
+      </select>
+
       {error && <div className="error">{error}</div>}
 
-      {!query && <h3 className="search-prompt">Search for your favorite movies!</h3>}
-
-      {loading && <h3 className="search-prompt">Loading...</h3>}
+      {loading && <div className="loading"></div>}
 
     </form>
   );

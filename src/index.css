@@ -120,6 +120,11 @@ p {
   }
 }
 /*  global classes */
+.paragraph {
+  max-width: 700px;
+  margin: auto;
+  text-align: center;
+}
 
 /* section */
 .section {
@@ -139,6 +144,10 @@ Search
 ===============
 */
 .search-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   width: 90vw;
   max-width: var(--max-width);
   margin: 0 auto;
@@ -317,4 +326,46 @@ Pagination
 }
 .pagination .btn {
   margin: 0;
+}
+
+/*
+=============== 
+Misc
+===============
+*/
+.website-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 80px;
+  padding: 0 24px;
+
+  background-color: lightcoral;
+}
+
+.website-header__right {
+  display: flex;
+  align-items: center;
+  gap: 0 24px;
+  flex-wrap: wrap;
+}
+
+.website-header__link {
+  margin: 0;
+
+  color: lemonchiffon;
+  font-size: clamp(26px, 5vw, 42px);
+  font-weight: bold;
+}
+.website-header__link--small {
+  font-size: 24px;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 80px 24px;
 }

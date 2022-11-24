@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const API_ENDPOINT = `https://www.omdbapi.com/?apikey=d21576fc`;
+export const API_ENDPOINT = `https://www.omdbapi.com/?apikey=d21576fc&plot=full`;
 
 const initialMovies = [];
 

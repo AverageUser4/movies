@@ -12,7 +12,7 @@ const MoviePage = () => {
   const goBackButton = <Link className="btn" to={state ?? '/'}>back to movies</Link>;
 
   if(loading)
-    return <h1>Loading...</h1>
+    return <div className="loading"></div>
 
   if(error)
     return (
