@@ -16,8 +16,12 @@ const SearchForm = ({ query, error, loading }) => {
     setRedirect(true);
   }
 
-  if(redirect)
-    return <Redirect to={textInput ? `/search?query=${textInput}&page=1` : '/search'}/>;
+  if(redirect) {
+    let url = '/search';
+    url += textInput ? `?s=${textInput}&page=1` : '';
+    url += textInput && select !== 'any' ? `&type=${select}` : '';
+    return <Redirect to={url}/>;
+  }
 
   return (
     <form 
@@ -36,15 +40,15 @@ const SearchForm = ({ query, error, loading }) => {
       <select 
         className="form-input"
         value={select}
-        onChange={(e) => setSelect(e.target.value)}
+        onChange={(e) => { 
+          setSelect(e.target.value);
+          handleSubmit(e);
+        }}
       >
 
         <option value="any">Any</option>
         <option value="movie">Movie</option>
         <option value="series">Series</option>
-        <option value="episode">Episode</option>
-
-        <option value="note">this select does not do anything yet</option>
 
       </select>
 

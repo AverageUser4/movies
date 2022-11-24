@@ -1,13 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import useQueryString from '../hooks/useQueryString';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Movie({ movie }) {
-  const { query, currentPage } = useQueryString();
+  const { search } = useLocation();
 
   return (
     <Link 
-      to={{ pathname: `/movies/${movie.imdbID}`, state: `/search?query=${query}&page=${currentPage}` }}
+      to={{ pathname: `/movies?i=${movie.imdbID}`, state: `/search${search}` }}
       className="movie"
     >
 

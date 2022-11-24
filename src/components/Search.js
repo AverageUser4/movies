@@ -5,11 +5,14 @@ import Movies from './Movies'
 import Pagination from './Pagination'
 import useMovieFetch from '../hooks/useMovieFetch.js';
 import useQueryString from '../hooks/useQueryString';
+import { useLocation } from 'react-router-dom';
 
 const Search = () => {
-  const { query, currentPage } = useQueryString();
+  const query = useQueryString().s;
+  const currentPage = parseInt(useQueryString().page) || 1;
+  const { search } = useLocation();
 
-  const { movies, pagesCount, error, loading } = useMovieFetch({ query, page: currentPage });
+  const { movies, pagesCount, error, loading } = useMovieFetch({ search });
 
   return (
     <main>

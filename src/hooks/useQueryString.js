@@ -1,15 +1,20 @@
 import { useLocation } from "react-router-dom";
 
 export default function useQueryString() {
-  let query = '';
-  let currentPage = 1;
+  const searchData = { s: '', page: '1' };
 
-  const search = useLocation().search + '&';
+  const { search } = useLocation();
+
   if(search) {
-    // could be made a bit cleaner
-    query = search?.match(/query=.+?&/)?.[0]?.replace('query=', '')?.replace('&', '') || '';
-    currentPage = parseInt(search?.match(/page=.+?&/)?.[0]?.replace('page=', '')?.replace('&', '')) || 1;
+    var noQuestionMark = search?.slice(search.indexOf('?') + 1);
+    var keyVal = noQuestionMark.split('&');
+
+    for(let param of keyVal) {
+      let arr = param.split('=');
+      if(arr.length === 2)
+        searchData[arr[0]] = arr[1];
+    }
   }
 
-  return { query, currentPage };
+  return searchData;
 }

@@ -15,11 +15,18 @@ function App() {
 
       <Switch>
 
-        <Route path={'/movies/:id'}>
+        {/* /movies may need to be nested in page */}
+        {/* - when refresed /movies works as expected 
+            - if movies has search string not precedeed by '/'
+              it doesn't work without refreshing (path doesn't match, renders 404)
+            - if search string is precedeed by '/' appropriate component renders
+              but it doesn't fetch until refreshed
+        */}
+        <Route path="/movies">
           <MoviePage/>
         </Route>
 
-        <Route path={["/search/:query/:page", "/search/:query", "/search"]}>
+        <Route path="/search">
           <Search/>
         </Route>
 

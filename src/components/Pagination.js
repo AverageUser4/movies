@@ -9,7 +9,7 @@ export default function Pagination({ query, currentPage, pagesCount }) {
         <li key={i}>
 
           <Link
-            to={`/search?query=${query}&page=${i}`}
+            to={`/search?s=${query}&page=${i}`}
             className={'btn' + (i === currentPage ? ' btn--active' : '')}
           >
             {i}
@@ -27,7 +27,7 @@ export default function Pagination({ query, currentPage, pagesCount }) {
 
       <Link 
         className="btn"
-        to={`/search?query=${query}&page=1`}
+        to={`/search?s=${query}&page=1`}
         title={1}
       >
         &lt;&lt;
@@ -37,7 +37,7 @@ export default function Pagination({ query, currentPage, pagesCount }) {
 
       <Link 
         className="btn"
-        to={`/search?query=${query}&page=${pagesCount}`}
+        to={`/search?s=${query}&page=${pagesCount}`}
         title={pagesCount}
       >
         &gt;&gt;

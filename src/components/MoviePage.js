@@ -1,15 +1,17 @@
 import React from 'react'
-import { useParams, useLocation, Link } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import useMovieFetch from '../hooks/useMovieFetch'
+import useQueryString from '../hooks/useQueryString';
 
 const noImagePlaceholder = 'https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png';
 
 const MoviePage = () => {
-  const { id } = useParams();
+  const id = useQueryString().i;
+  console.log(useQueryString())
   const { movies, loading, error } = useMovieFetch({ id });
   const { state } = useLocation();
 
-  const goBackButton = <Link className="btn" to={state ?? '/'}>back to movies</Link>;
+  const goBackButton = <Link className="btn" to={state ?? '/search'}>back to movies</Link>;
 
   if(loading)
     return <div className="loading"></div>

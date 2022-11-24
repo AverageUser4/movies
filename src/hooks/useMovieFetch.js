@@ -4,14 +4,16 @@ export const API_ENDPOINT = `https://www.omdbapi.com/?apikey=d21576fc&plot=full`
 
 const initialMovies = [];
 
-export default function useMovieFetch({ query = '', page = null, id = null }) {
+export default function useMovieFetch({ search, id }) {
   const [movies, setMovies] = useState(initialMovies);
   const [pagesCount, setPagesCount] = useState(1);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  console.log(search,id)
+
   useEffect(() => {
-    if(!query && !id) {
+    if(!search?.includes('s=') && !id) {
       setMovies(initialMovies);
       setPagesCount(1);
       setError(null);
@@ -23,7 +25,7 @@ export default function useMovieFetch({ query = '', page = null, id = null }) {
     fetchMovies(ignoreObject);
 
     return () => ignoreObject.ignore = true;
-  }, [query, page, id]);
+  }, [search, id]);
   
   async function fetchMovies(ignoreObject) {
     try {
@@ -32,11 +34,9 @@ export default function useMovieFetch({ query = '', page = null, id = null }) {
 
       let url = API_ENDPOINT;
       if(id)
-        url += `&i=${id}`;
-      else {
-        url += query ? `&s=${query}` : '';
-        url += `&page=${page}`;
-      }
+        url += id ? `&i=${id}` : '';
+      else
+        url += search ? search.replace('?', '&') : '';
   
       const response = await fetch(url);
       const json = await response.json();
