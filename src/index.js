@@ -15,8 +15,3 @@ root.render(
 
   </StrictMode>
 );
-
-/*
-  TODO:
-    - it would be better to make search params the same as in API
-*/
