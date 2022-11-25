@@ -7,7 +7,7 @@ const noImagePlaceholder = 'https://upload.wikimedia.org/wikipedia/commons/f/fc/
 
 const MoviePage = () => {
   const id = useQueryString().i;
-  console.log(useQueryString())
+  // console.log(useQueryString(), useLocation())
   const { movies, loading, error } = useMovieFetch({ id });
   const { state } = useLocation();
 

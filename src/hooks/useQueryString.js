@@ -3,7 +3,11 @@ import { useLocation } from "react-router-dom";
 export default function useQueryString() {
   const searchData = { s: '', page: '1' };
 
-  const { search } = useLocation();
+  const { pathname } = useLocation();
+  let { search } = useLocation();
+
+  if(!search && pathname.includes('?'))
+    search = pathname.slice(pathname.indexOf('?') + 1);
 
   if(search) {
     var noQuestionMark = search?.slice(search.indexOf('?') + 1);

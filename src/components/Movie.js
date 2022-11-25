@@ -6,7 +6,7 @@ export default function Movie({ movie }) {
 
   return (
     <Link 
-      to={{ pathname: `/movies?i=${movie.imdbID}`, state: `/search${search}` }}
+      to={{ pathname: `/movies/?i=${movie.imdbID}`, state: `/search${search}` }}
       className="movie"
     >
 

@@ -10,8 +10,6 @@ export default function useMovieFetch({ search, id }) {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  console.log(search,id)
-
   useEffect(() => {
     if(!search?.includes('s=') && !id) {
       setMovies(initialMovies);
